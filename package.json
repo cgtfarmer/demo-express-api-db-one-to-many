@@ -1,0 +1,19 @@
+{
+  "name": "my-app",
+  "version": "1.0.0",
+  "description": "Description",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "DEBUG=app:* node src/app.js",
+    "test-e2e": "playwright test"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "mysql2": "^3.7.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.1",
+    "@types/node": "^20.11.0"
+  }
+}
