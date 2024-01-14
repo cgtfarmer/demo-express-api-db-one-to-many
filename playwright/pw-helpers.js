@@ -27,6 +27,21 @@ class PwHelpers {
 
     return await createUserResponse.json();
   };
+
+  static async createDefaultUserWithStateId(request, stateId) {
+    const createUserResponse = await request.post('/users', {
+      data: {
+        firstName: "John",
+        lastName: "Doe",
+        age: 35,
+        weight: 185.3,
+        income: 50000.0,
+        stateId: stateId
+      }
+    });
+
+    return await createUserResponse.json();
+  };
 }
 
 module.exports = PwHelpers;

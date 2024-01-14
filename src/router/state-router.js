@@ -1,36 +1,38 @@
 const express = require('express');
 const router = express.Router();
+const stateUserRouter = require('./state-user-router');
 const StateController = require('../controller/state-controller');
 
-router.get('/', async function(request, response) {
-  console.log(`[StateRouter] [${request.method}] ${request.url}`);
+router.use('/:id/users', stateUserRouter);
 
-  StateController.index(request, response);
+router.get('/', async (req, res) => {
+  console.log(`[StateRouter] [${req.method}] ${req.url}`);
+
+  StateController.index(req, res);
 });
 
-router.get('/:id', async function(request, response) {
-  console.log(`[StateRouter] [${request.method}] ${request.url}`);
+router.get('/:id', async (req, res) => {
+  console.log(`[StateRouter] [${req.method}] ${req.url}`);
 
-  StateController.show(request, response);
+  StateController.show(req, res);
 });
 
-router.post('/', async function(request, response) {
-  console.log(`[StateRouter] [${request.method}] ${request.url}`);
+router.post('/', async (req, res) => {
+  console.log(`[StateRouter] [${req.method}] ${req.url}`);
 
-  StateController.create(request, response);
+  StateController.create(req, res);
 });
 
-router.put('/:id', async function(request, response) {
-  console.log(`[StateRouter] [${request.method}] ${request.url}`);
+router.put('/:id', async (req, res) => {
+  console.log(`[StateRouter] [${req.method}] ${req.url}`);
 
-  StateController.update(request, response);
+  StateController.update(req, res);
 });
 
-router.delete('/:id', async function(request, response) {
-  console.log(`[StateRouter] [${request.method}] ${request.url}`);
+router.delete('/:id', async (req, res) => {
+  console.log(`[StateRouter] [${req.method}] ${req.url}`);
 
-  StateController.destroy(request, response);
+  StateController.destroy(req, res);
 });
 
 module.exports = router;
-

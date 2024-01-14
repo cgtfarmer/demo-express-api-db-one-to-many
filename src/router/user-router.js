@@ -2,34 +2,34 @@ const express = require('express');
 const router = express.Router();
 const UserController = require('../controller/user-controller');
 
-router.get('/', async function(request, response) {
-  console.log(`[UserRouter] [${request.method}] ${request.url}`);
+router.get('/', async (req, res) => {
+  console.log(`[UserRouter] [${req.method}] ${req.url}`);
 
-  UserController.index(request, response);
+  UserController.index(req, res);
 });
 
-router.get('/:id', async function(request, response) {
-  console.log(`[UserRouter] [${request.method}] ${request.url}`);
+router.get('/:id', async (req, res) => {
+  console.log(`[UserRouter] [${req.method}] ${req.url}`);
 
-  UserController.show(request, response);
+  UserController.show(req, res);
 });
 
-router.post('/', async function(request, response) {
-  console.log(`[UserRouter] [${request.method}] ${request.url}`);
+router.post('/', async (req, res) => {
+  console.log(`[UserRouter] [${req.method}] ${req.url}`);
 
-  UserController.create(request, response);
+  UserController.create(req, res);
 });
 
-router.put('/:id', async function(request, response) {
-  console.log(`[UserRouter] [${request.method}] ${request.url}`);
+router.put('/:id', async (req, res) => {
+  console.log(`[UserRouter] [${req.method}] ${req.url}`);
 
-  UserController.update(request, response);
+  UserController.update(req, res);
 });
 
-router.delete('/:id', async function(request, response) {
-  console.log(`[UserRouter] [${request.method}] ${request.url}`);
+router.delete('/:id', async (req, res) => {
+  console.log(`[UserRouter] [${req.method}] ${req.url}`);
 
-  UserController.destroy(request, response);
+  UserController.destroy(req, res);
 });
 
 module.exports = router;

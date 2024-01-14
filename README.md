@@ -16,4 +16,4 @@ Run: `docker-compose down; docker-compose up -d; docker-compose logs -f`
 
 ### Run Playwright Tests
 
-Run: `docker-compose down; docker-compose up -d db; sleep 15; docker-compose run --rm app bash -c "npm run start & sleep 5; npm run test-e2e"`
+Run: `docker-compose down; docker-compose up -d db; sleep 18; docker-compose run --rm app bash -c "npm run start & sleep 5; npm run test-e2e"`

@@ -7,7 +7,7 @@ test('retrieve states', async ({ request }) => {
   expect(response.ok()).toBeTruthy();
 
   const body = await response.json();
-  expect(body.length).toBeGreaterThan(-1);
+  expect(body.length).toBeGreaterThanOrEqual(0);
 });
 
 test('create state', async ({ request }) => {
@@ -21,7 +21,7 @@ test('create state', async ({ request }) => {
   expect(response.ok()).toBeTruthy();
 
   const body = await response.json();
-  expect(body.id).toBeGreaterThan(-1);
+  expect(body.id).toBeGreaterThanOrEqual(0);
 });
 
 test('retrieve state', async ({ request }) => {

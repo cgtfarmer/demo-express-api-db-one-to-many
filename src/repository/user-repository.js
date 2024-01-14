@@ -5,10 +5,12 @@ class UserRepository {
   static async findAll(stateId) {
     console.log(`[UserRepository#findAll] stateId=${stateId}`);
 
-    const sql = `
+    let sql = `
       SELECT *
       FROM users
     `;
+
+    if (stateId != undefined) sql += `WHERE stateId = ${stateId}`;
 
     const results = await DbClient.executeStatement(sql);
 

@@ -8,7 +8,7 @@ test('retrieve users', async ({ request }) => {
   expect(response.ok()).toBeTruthy();
 
   const body = await response.json();
-  expect(body.length).toBeGreaterThan(-1);
+  expect(body.length).toBeGreaterThanOrEqual(0);
 });
 
 test('create user', async ({ request }) => {

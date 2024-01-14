@@ -28,7 +28,7 @@ class UserController {
     const response = await UserRepository.create(data);
 
     console.log(`Response: ${JSON.stringify(response)}`);
-    res.status(200).json(response);
+    res.status(201).json(response);
   }
 
   static async update(req, res) {
