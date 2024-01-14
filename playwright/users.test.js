@@ -1,5 +1,6 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
+const PwHelpers = require('./pw-helpers');
 
 test('retrieve users', async ({ request }) => {
   const response = await request.get('/users');
@@ -11,15 +12,7 @@ test('retrieve users', async ({ request }) => {
 });
 
 test('create user', async ({ request }) => {
-  // Create State
-  const createStateResponse = await request.post('/states', {
-    data: {
-      name: 'Nebraska',
-      symbol: 'NE',
-    }
-  });
-
-  expect(createStateResponse.ok()).toBeTruthy();
+  const createStateBody = await PwHelpers.createDefaultState(request);
 
   const response = await request.post('/users', {
     data: {
@@ -28,86 +21,47 @@ test('create user', async ({ request }) => {
       age: 35,
       weight: 185.3,
       income: 50000.0,
-      stateId: 1
+      stateId: createStateBody.id,
     }
   });
 
   expect(response.ok()).toBeTruthy();
 
   const body = await response.json();
-  expect(body.id).toBeGreaterThan(-1);
+
+  expect(Number.isInteger(body.id)).toBeTruthy();
+  expect(body.id).toBeGreaterThan(0);
+  expect(body.firstName).toBe("John");
+  expect(body.lastName).toBe("Doe");
+  expect(body.age).toBe(35);
+  expect(body.weight).toBe(185.3);
+  expect(body.income).toBe(50000.0);
+  expect(body.stateId).toBe(createStateBody.id);
 });
 
 test('retrieve user', async ({ request }) => {
-  // Create State
-  const createStateResponse = await request.post('/states', {
-    data: {
-      name: 'Nebraska',
-      symbol: 'NE',
-    }
-  });
-
-  expect(createStateResponse.ok()).toBeTruthy();
-
-  // Create User
-  const createUserResponse = await request.post('/users', {
-    data: {
-      firstName: "John",
-      lastName: "Doe",
-      age: 35,
-      weight: 185.3,
-      income: 50000.0,
-      stateId: 1
-    }
-  });
-
-  expect(createUserResponse.ok()).toBeTruthy();
-
-  const createUserBody = await createUserResponse.json();
+  const createUserBody = await PwHelpers.createDefaultUser(request);
   const newUserId = createUserBody.id;
 
-  // Retrieve User
-  const getUserResponse = await request.get(`/users/${newUserId}`);
+  const response = await request.get(`/users/${newUserId}`);
 
-  expect(getUserResponse.ok()).toBeTruthy();
+  expect(response.ok()).toBeTruthy();
 
-  const getUserBody = await getUserResponse.json();
-  expect(getUserBody.id).toBe(newUserId);
+  const body = await response.json();
+
+  expect(Number.isInteger(body.id)).toBeTruthy();
+
+  expect(body.id).toBe(newUserId);
 });
 
 test('destroy user', async ({ request }) => {
-  // Create State
-  const createStateResponse = await request.post('/states', {
-    data: {
-      name: 'Nebraska',
-      symbol: 'NE',
-    }
-  });
-
-  expect(createStateResponse.ok()).toBeTruthy();
-
-  // Create User
-  const createUserResponse = await request.post('/users', {
-    data: {
-      firstName: "John",
-      lastName: "Doe",
-      age: 35,
-      weight: 185.3,
-      income: 50000.0,
-      stateId: 1
-    }
-  });
-
-  expect(createUserResponse.ok()).toBeTruthy();
-
-  const createUserBody = await createUserResponse.json();
+  const createUserBody = await PwHelpers.createDefaultUser(request);
   const newUserId = createUserBody.id;
 
-  // Destroy User
-  const destroyUserResponse = await request.delete(`/users/${newUserId}`);
+  const response = await request.delete(`/users/${newUserId}`);
 
-  expect(destroyUserResponse.ok()).toBeTruthy();
+  expect(response.ok()).toBeTruthy();
 
-  const destroyUserBody = await destroyUserResponse.json();
-  expect(destroyUserBody.msg).toBe('Deleted successfully');
+  const body = await response.json();
+  expect(body.msg).toBe('Deleted successfully');
 });
