@@ -18,7 +18,7 @@ jobs:
         env:
           MYSQL_DATABASE: myDatabase
           MYSQL_ROOT_PASSWORD: super
-        command: --default-authentication-plugin=mysql_native_password
+        options: --default-authentication-plugin=mysql_native_password
         ports:
           - 3306:3306
         volumes:
