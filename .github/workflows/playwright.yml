@@ -20,7 +20,7 @@ jobs:
           docker-compose build
       - name: Run tests
         run: |
-          docker-compose up -d db; sleep 18; docker-compose run --rm app bash -c "npm run start & sleep 5; npm run test-e2e"
+          docker-compose up -d db; sleep 18; docker-compose run --rm app bash -c "npm ci; npm run start & sleep 5; npm run test-e2e"
 
     # runs-on: ubuntu-latest
     # timeout-minutes: 5
