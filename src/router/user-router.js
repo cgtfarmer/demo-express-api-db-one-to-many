@@ -8,16 +8,16 @@ router.get('/', async (req, res) => {
   UserController.index(req, res);
 });
 
-router.get('/:id', async (req, res) => {
-  console.log(`[UserRouter] [${req.method}] ${req.url}`);
-
-  UserController.show(req, res);
-});
-
 router.post('/', async (req, res) => {
   console.log(`[UserRouter] [${req.method}] ${req.url}`);
 
   UserController.create(req, res);
+});
+
+router.get('/:id', async (req, res) => {
+  console.log(`[UserRouter] [${req.method}] ${req.url}`);
+
+  UserController.show(req, res);
 });
 
 router.put('/:id', async (req, res) => {

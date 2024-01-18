@@ -3,9 +3,10 @@ const UserRepository = require('../repository/user-repository');
 class UserController {
 
   static async index(req, res) {
-    console.log('[UserController#index]');
+    const stateId = req.params.id;
+    console.log(`[UserController#index] stateId=${stateId}`);
 
-    const response = await UserRepository.findAll();
+    const response = await UserRepository.findAll(stateId);
 
     console.log(`Response: ${JSON.stringify(response)}`);
     res.status(200).json(response);

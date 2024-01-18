@@ -5,8 +5,8 @@
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
-    "dev": "DEBUG=app:* node src/app.js",
-    "test-e2e": "playwright test"
+    "dev": "node src/app.js",
+    "test-e2e": "playwright test --debug"
   },
   "dependencies": {
     "express": "^4.16.4",
